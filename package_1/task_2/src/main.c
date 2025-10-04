@@ -22,6 +22,7 @@ static int parse_input(const char *input, unsigned int *parsed_input) {
 int main(void) {
     char buffer[256];
 
+    printf("Enter number of requests: ");
     if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
         fprintf(stderr, "Failed to read number of the requests.\n");
         return 1;
@@ -34,6 +35,7 @@ int main(void) {
     }
 
     for (unsigned int i = 0; i < T; i++) {
+        printf("Enter a request: ");
         if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
             fprintf(stderr, "Erorr occured while reading request: %u.\n", i + 1);
             return 1;
