@@ -96,4 +96,33 @@ int main(void) {
         return 1;
     }
     printf("e calculated by equation with approximation %.6lf is equal to %.17lf\n", epsi, e);
+
+    double pi;
+    if (calculate_pi_equation(epsi, &pi) != 0) {
+        fprintf(stderr, "Error: An error occured.\n");
+        return 1;
+    }
+    printf("pi calculated by equation with approximation %.6lf is equal to %.17lf\n", epsi, pi);
+
+    double ln2;
+    if (calculate_ln2_equation(epsi, &ln2) != 0) {
+        fprintf(stderr, "Error: An error occured.\n");
+        return 1;
+    }
+    printf("ln2 calculated by equation with approximation %.6lf is equal to %.17lf\n", epsi, ln2);
+
+    double sqrt_x;
+    if (calculate_sqrt_x_equation(epsi, &sqrt_x) != 0) {
+        fprintf(stderr, "Error: An error occured.\n");
+        return 1;
+    }
+    printf("sqrt_x calculated by equation with approximation %.6lf is equal to %.17lf\n", epsi, sqrt_x);
+
+    long double gamma;
+    unsigned long long limit_for_gamma = 100000ULL;
+    if (calculate_gamma_equation(limit_for_gamma, &gamma) != 0) {
+        fprintf(stderr, "Error: An error occured.\n");
+        return 1;
+    }
+    printf("gamma calculated by equation is equal to %.17Lf\n", gamma);
 }
