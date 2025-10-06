@@ -115,7 +115,7 @@ int calculate_gamma_series(double epsi, double *gamma) {
         int root = (int)sqrt((double)k);
         term = 1.0 / (root * root) - 1.0 / k;
 
-        if (fabs(term) < epsi) {
+        if (k > 500 && fabs(term) < epsi) {
             break;
         }
 
