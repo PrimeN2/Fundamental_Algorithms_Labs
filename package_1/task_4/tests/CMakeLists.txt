@@ -9,4 +9,4 @@ add_executable(test_task4
 
 target_link_libraries(test_task4 m)
 
-add_test(NAME test_task3 COMMAND test_task3)
+add_test(NAME test_task4 COMMAND test_task4)

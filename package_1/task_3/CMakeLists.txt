@@ -8,7 +8,6 @@ add_executable(task_3
 
 target_link_libraries(task_3 m)
 
-option(BUILD_TESTS "Build tests" OFF)
 if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
