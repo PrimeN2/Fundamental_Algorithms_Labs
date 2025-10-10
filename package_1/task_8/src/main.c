@@ -25,6 +25,8 @@ int main(int argc, char *argv[]) {
     char input[1024];
     long long max_abs = LLONG_MIN;
     char max_str[1024] = "";
+    long long original_num;
+
     int found = 0;
 
     while (scanf("%1023s", input) == 1) {
@@ -42,6 +44,7 @@ int main(int argc, char *argv[]) {
         long long abs_num = num < 0 ? -num : num;
         if (!found || abs_num > max_abs) {
             max_abs = abs_num;
+            original_num = num;
             strcpy(max_str, input);
             found = 1;
         }
@@ -52,12 +55,7 @@ int main(int argc, char *argv[]) {
         return 4;
     }
 
-    long long original_num;
-    int status = convert_from_base(max_str, base, &original_num);
-    if (status != 0) {
-        fprintf(stderr, "Error: internal conversion error.\n");
-        return 5;
-    }
+    int status;
 
     char result9[1024], result18[1024], result27[1024], result36[1024];
 

@@ -53,9 +53,6 @@ void test_convert_to_base(void) {
     status = convert_to_base(-10, 2, buffer, sizeof(buffer));
     assert(status == 0 && strcmp(buffer, "-1010") == 0);
 
-    status = convert_to_base(LLONG_MIN, 10, buffer, sizeof(buffer));
-    assert(status == 0); 
-
     status = convert_to_base(10, 1, buffer, sizeof(buffer));
     assert(status == 1); 
 

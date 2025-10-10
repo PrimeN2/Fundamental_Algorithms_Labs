@@ -88,13 +88,8 @@ int convert_to_base(long long num, int base, char *buffer, size_t buffer_size) {
 
     int sign = 0;
     if (num < 0) {
-        sign = 1;
-        if (num == LLONG_MIN) {
-            num = -(num + 1);
-            sign = 2;
-        } else {
-            num = -num;
-        }
+        sign = -1;
+        num = -num;
     }
 
     char temp[128];
@@ -124,11 +119,8 @@ int convert_to_base(long long num, int base, char *buffer, size_t buffer_size) {
     }
 
     int pos = 0;
-    if (sign == 1) {
+    if (sign == -1) {
         buffer[pos++] = '-';
-    } else if (sign == 2) {
-        buffer[pos++] = '-';
-        temp[0]++;
     }
 
     for (int i = idx - 1; i >= 0; i--) {
