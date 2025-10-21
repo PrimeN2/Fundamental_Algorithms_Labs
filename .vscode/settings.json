@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "series_sum.h": "c"
+        "series_sum.h": "c",
+        "string.h": "c",
+        "cstdarg": "c",
+        "cstdio": "c",
+        "cwchar": "c",
+        "__locale": "c"
     }
 }
