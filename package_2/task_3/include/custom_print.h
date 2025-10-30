@@ -15,5 +15,6 @@ int sbuf_add(sbuf_t *sbuf, char c);
 int sbuf_flush(sbuf_t *sbuf);
 
 int overfprintf(FILE *stream, const char *format, ...);
+int oversprintf(char *str, const char *format, ...); 
 
 #endif

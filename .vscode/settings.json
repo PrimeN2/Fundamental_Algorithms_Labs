@@ -5,6 +5,7 @@
         "cstdarg": "c",
         "cstdio": "c",
         "cwchar": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "custom_print.h": "c"
     }
 }
