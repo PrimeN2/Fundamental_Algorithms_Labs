@@ -25,7 +25,8 @@ static int sreadl(char *buffer, size_t buffer_size, const char *prompt) {
         return 1;
     }
 
-    if (buffer[0] == '/' || (strlen(buffer) >= 2 && buffer[0] == '.' && buffer[1] == '.' && (buffer[2] == '\0' || buffer[2] == '/'))) {
+    if (buffer[0] == '/' || (strlen(buffer) >= 2 && buffer[0] == '.' 
+    && buffer[1] == '.' && (buffer[2] == '\0' || buffer[2] == '/'))) {
         perror("Input is absolute path or has relative marks.\n");
         return 1;
     }
@@ -69,11 +70,11 @@ int main(void) {
     char line[MAX_LINE_LENGTH];
     Word *words = NULL;
 
-    char c;
+    int c;
     while ((c = fgetc(input_file)) != EOF) {
-        buf_add(c);
-        size_t words_count = extract_words(line, &words, sizeof(line));
+        
 
+        
 
 
     }

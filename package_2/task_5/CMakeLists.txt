@@ -1,3 +1,3 @@
-inlcude_directories(include)
+include_directories(include)
 
-add_executable(task_5 src/)
+""" add_executable(task_5 main.c src/text_processor.c)

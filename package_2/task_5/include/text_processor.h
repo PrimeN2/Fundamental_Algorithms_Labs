@@ -6,10 +6,10 @@
 typedef struct {
     char *word;
     size_t len;
-} Word_t;
+} Word;
 
 typedef struct {
-
+    char *buf;
 } Buffer;
 
 int extract_words(const char *line, Word **words, size_t max_str_len);
