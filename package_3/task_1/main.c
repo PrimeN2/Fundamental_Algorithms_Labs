@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int add_binary(int a, int b) {
+static int add_binary(int a, int b) {
     while (b != 0) {
         int carry = a & b;
         a = a ^ b;
@@ -10,58 +10,87 @@ int add_binary(int a, int b) {
     return a;
 }
 
-void convert_to_base(int num, char base_rate) { // DOC: base_rate = {1; 5}
+static int substract_binary(int a, int b) {
+    while (b != 0) {
+        int borrow = (~a) & b;
+        a = a ^ b;
+        b = borrow << 1;
+    }
+    
+    return a;
+}
+
+static int int_divide_pot_binary(int num, int pow) { // pot == power of two
+    return num >> pow;
+}
+
+static int divide_for_carry_pot_binary(int num, int pow) {
+    int tmp = num >> pow;
+    tmp = tmp << pow;
+
+    return num ^ tmp;
+}   
+
+static int reverse_binary(int num) {
+    num = ~num;
+    num = add_binary(num, 1);
+
+    return num;
+}
+
+int convert_to_base(char result[], int num, int base_pow) { // DOC: base_rate = {1; 5}
+    if (base_pow > 5 || base_pow < 1) {
+        perror("Error: Wrong base power.\n");
+        return -1;
+    }
+
     const char digits[] = "0123456789ABCDEF";
 
-    int base = 1 << base_rate;
-    int *out;
+    int base = 1 << base_pow;
 
     int sign = 1;
-    char result[30];
     int index = 0;
 
     if (num == 0) {
         result[0] = '0';
         result[1] = '\0';
-        return;
+        return 0;
     }
 
     if (num < 0) {
         sign = -1;
         result[0] = '-';
-        index++;
+        index = add_binary(index, 1);
+        num = reverse_binary(num);
     }
 
-    num *= sign;
+    int original_index = index;
 
     while (num > 0) {
-        result[index] = digits[num % base];
-        index++;
-        num /= base;
+        int carry = divide_for_carry_pot_binary(num, base_pow);
+        result[index] = digits[carry];
+        index = add_binary(index, 1);
+        num = int_divide_pot_binary(num, base_pow);
     }
 
     result[index] = '\0';
 
-    for (int i = 0; i < index / 2; i++) {
-        char temp = result[i];
-        result[i] = result[index - 1 - i];
-        result[index - 1 - i] = temp;
+    int start = (result[0] == '-') ? 1 : 0;
+    int end = index - 1;
+    while (start < end) {
+        char temp = result[start];
+        result[start] = result[end];
+        result[end] = temp;
+        start = add_binary(start, 1);
+        end = substract_binary(end, 1);
     }
-}
 
-
-void printBinary(unsigned int n) {
-    for (int i = sizeof(n) * 8 - 1; i >= 0; i--) {
-        printf("%d", (n >> i) & 1);
-    }
-    printf("\n");
+    return 0;
 }
 
 int main(void) {
-    printBinary(2 << 3);
-    printf("%d\n", 2 << 3);
-    printBinary(4);
-    printBinary(8);
-
+    char buffer[30];
+    convert_to_base(buffer, -7, 1);
+    printf("%s\n", buffer);
     return 0;
 }
