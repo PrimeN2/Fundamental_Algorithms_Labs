@@ -13,4 +13,4 @@ if(BUILD_TESTS)
     enable_testing()
 endif()
 
-add_subdirectory(package_2)
+add_subdirectory(package_3)

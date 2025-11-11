@@ -13,7 +13,7 @@ typedef struct {
 void init_vector(vector *v, size_t elem_size);
 void destroy_vector(vector *v);
 int push_vector(vector *v, const void *elem);
-int pop_vector(vector *v);
+int pop_vector(vector *v, void *elem);
 void* get_vector(const vector* v, size_t index);
 
 #endif

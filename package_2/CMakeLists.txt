@@ -1,8 +1,6 @@
-include_directories(include)
 
 
 
 
-
-
+add_subdirectory(task_6)
 
