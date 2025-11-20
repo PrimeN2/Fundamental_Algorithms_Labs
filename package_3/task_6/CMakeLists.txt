@@ -1,0 +1,1 @@
+add_executable(p3_t6 main.c)
