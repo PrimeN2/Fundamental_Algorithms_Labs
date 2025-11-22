@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "variables.h"
 #include <stdio.h>
 
 static int resize_variables(variables *vs, size_t new_capacity) {

@@ -1,6 +1,7 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef VARIABLES_H
+#define VARIABLES_H
 
+#define INITIAL_CAPACITY 2
 #define RESIZE_FACTOR 2
 
 #include <stdlib.h>
@@ -20,5 +21,6 @@ int create_variables(variables *vs, size_t initial_capacity);
 int add_variable(variables *vs, char name, int value);
 int get_variable(variables *vs, char name, int *out_value);
 int print_all(variables *vs);
+int free_variables(variables *vs);
 
 #endif
