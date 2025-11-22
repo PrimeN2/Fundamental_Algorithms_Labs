@@ -1,1 +1,2 @@
 add_subdirectory(task_6)
+add_subdirectory(task_7)

@@ -7,7 +7,7 @@ static int resize_variables(variables *vs, size_t new_capacity) {
         return -1;
     }
 
-    variable *new_vs = realloc(vs->data, new_capacity);
+    variable *new_vs = realloc(vs->data, new_capacity * sizeof(variable));
     if (!new_vs) {
         perror("Cannot realloc variables.\n");
         return -1;
@@ -54,7 +54,7 @@ int get_variable(variables *vs, char name, int *out_value) {
         return -1;
     }
 
-    for (int i = 0; i < vs->size; ++i) {
+    for (size_t i = 0; i < vs->size; ++i) {
         if (vs->data[i].name == name) {
             *out_value = vs->data[i].value;
             return 0;
@@ -62,6 +62,12 @@ int get_variable(variables *vs, char name, int *out_value) {
     }
 
     *out_value = -1;
+
+    return 0;
+}
+
+int free_variables(variables *vs) {
+    free(vs->data);
 
     return 0;
 }

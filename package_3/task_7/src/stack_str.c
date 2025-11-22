@@ -1,4 +1,5 @@
 #include "stack_str.h"
+#include <string.h>
 
 int create_str_stack(stack_str_t *stack) {
     stack->data = malloc(INITIAL_STACK_CAPACITY * sizeof(char*));
