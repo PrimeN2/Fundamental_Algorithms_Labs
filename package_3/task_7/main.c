@@ -20,8 +20,14 @@ int main(void) {
         return -1;
     }
 
+    FILE *tracefile = fopen("trace.log", "w");
+    if (!tracefile) {
+        perror("Can't create tracefile.\n");
+        return -1;
+    }
+
     interpretator_state state;
-    if (create_interpretator(&state) != 0) {
+    if (create_interpretator(&state, tracefile) != 0) {
         perror("Can't create an interpretator.\n");
         return -1;
     }
@@ -34,15 +40,10 @@ int main(void) {
             return -1;
         }
     }
-
-    printf("Name: %c, Value: %d.\n", state.vs.data[0].name, state.vs.data[0].value);
-    printf("Name: %c, Value: %d.\n", state.vs.data[1].name, state.vs.data[1].value);
-    printf("Name: %c, Value: %d.\n", state.vs.data[2].name, state.vs.data[2].value);
-    printf("Name: %c, Value: %d.\n", state.vs.data[3].name, state.vs.data[3].value);
     
     free_variables(&state.vs);
-    if (fclose(input_file) != 0) {
-        perror("Error closing file.\n");
+    if (fclose(input_file) != 0 || fclose(tracefile) != 0) {
+        perror("Error closing files.\n");
     }
 
     return 0;

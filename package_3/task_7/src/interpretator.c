@@ -1,6 +1,7 @@
 #include "interpretator.h"
 #include "stack_int.h"
 #include "stack_char.h"
+#include "traceback.h"
 #include <stdio.h>
 #include <stdio.h>
 #include <string.h>
@@ -276,18 +277,21 @@ static int handle_print(interpretator_state *state) {
 }
 
 
-int create_interpretator(interpretator_state *state) {
+int create_interpretator(interpretator_state *state, FILE *tracefile) {
     variables vs;
     create_variables(&vs, INITIAL_CAPACITY);
     state->vs = vs;
     state->current_idx = 0;
     state->current_str = NULL;
+    state->line_number = 0;
+    state->trace_file = tracefile;
 
     return 0;
 }
 
 int interpretate_str(interpretator_state *state, char *str) {
     state->current_str = str;
+    state->line_number++;
 
     for (state->current_idx = 0; state->current_str[state->current_idx] != '\0'; state->current_idx++) {
         if (isspace(state->current_str[state->current_idx])) {
@@ -305,7 +309,7 @@ int interpretate_str(interpretator_state *state, char *str) {
                 return -1;
             }
 
-            break;
+            return write_trace(state, "Arithmetic operation");
         } else if (strncmp(&state->current_str[state->current_idx], "print", 5) == 0) {
             state->current_idx += 5;
             if (handle_print(state) != 0) {
@@ -313,7 +317,7 @@ int interpretate_str(interpretator_state *state, char *str) {
                 return -1;
             }
 
-            break;
+            return write_trace(state, "Print");
         } 
         else {
             fprintf(stderr, "SyntaxError: Character \'%c\' is undefined.\n", state->current_str[state->current_idx]);
